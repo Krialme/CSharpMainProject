@@ -26,9 +26,9 @@ namespace Model.Runtime.Projectiles
             float localHeight = 0f;
             float totalDistance = _totalDistance;
 
-            float maxHeight = 0.6f * totalDistance;                        ///////////////////////////////////////
-            float part1 = t * 2 - 1;                                         // Insert you code here
-            localHeight = maxHeight * (-part1 * part1 + 1);    ///////////////////////////////////////   
+            float maxHeight = 0.6f * totalDistance;                        
+            float part1 = t * 2 - 1;                                       
+            localHeight = maxHeight * (-part1 * part1 + 1);                   
             Debug.Log("maxHeigh is " + maxHeight);                         
             Debug.Log("LocalHeigh is " + localHeight);                                                                                         
             ///////////////////////////////////////
