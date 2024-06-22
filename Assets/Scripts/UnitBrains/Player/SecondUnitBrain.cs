@@ -25,7 +25,7 @@ namespace UnitBrains.Player
                 return;
             }
 
-            for (float i = _temperature +1; i < 4 && i >= 1 ; i--)
+            for (float i = _temperature +1; i <= overheatTemperature && i >= 1 ; i--)
             {
                 var projectile = CreateProjectile(forTarget);
                 AddProjectileToList(projectile, intoList);
