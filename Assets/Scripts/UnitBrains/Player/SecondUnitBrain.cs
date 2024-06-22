@@ -12,16 +12,28 @@ namespace UnitBrains.Player
         private float _temperature = 0f;
         private float _cooldownTime = 0f;
         private bool _overheated;
-        
+
         protected override void GenerateProjectiles(Vector2Int forTarget, List<BaseProjectile> intoList)
         {
             float overheatTemperature = OverheatTemperature;
-            ///////////////////////////////////////
-            // Homework 1.3 (1st block, 3rd module)
-            ///////////////////////////////////////           
-            var projectile = CreateProjectile(forTarget);
-            AddProjectileToList(projectile, intoList);
-            ///////////////////////////////////////
+
+            Debug.Log("температура = " + GetTemperature());
+            Debug.Log("Перегрев = " + _overheated);
+
+            if (GetTemperature() >= overheatTemperature)
+            {
+                return;
+            }
+
+            for (float i = _temperature +1; i < 4 && i >= 1 ; i--)
+            {
+                var projectile = CreateProjectile(forTarget);
+                AddProjectileToList(projectile, intoList);
+                Debug.Log("Сгенерирован снаряд");
+            }
+
+            IncreaseTemperature();
+            
         }
 
         public override Vector2Int GetNextStep()
