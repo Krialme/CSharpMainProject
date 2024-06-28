@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using GluonGui.Dialog;
 using Model.Runtime.Projectiles;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 namespace UnitBrains.Player
 {
@@ -17,19 +19,19 @@ namespace UnitBrains.Player
         {
             float overheatTemperature = OverheatTemperature;
 
-            Debug.Log("температура = " + GetTemperature());
-            Debug.Log("Перегрев = " + _overheated);
+            //Debug.Log("температура = " + GetTemperature());
+            //Debug.Log("Перегрев = " + _overheated);
 
             if (GetTemperature() >= overheatTemperature)
             {
                 return;
             }
 
-            for (float i = _temperature +1; i <= overheatTemperature && i >= 1 ; i--)
+            for (float i = _temperature + 1; i <= overheatTemperature && i > 0; i--)
             {
                 var projectile = CreateProjectile(forTarget);
                 AddProjectileToList(projectile, intoList);
-                Debug.Log("Сгенерирован снаряд");
+                //Debug.Log("Сгенерирован снаряд");
             }
 
             IncreaseTemperature();
@@ -43,18 +45,31 @@ namespace UnitBrains.Player
 
         protected override List<Vector2Int> SelectTargets()
         {
-            ///////////////////////////////////////
-            // Homework 1.4 (1st block, 4rd module)
-            ///////////////////////////////////////
             List<Vector2Int> result = GetReachableTargets();
+
+            //Vector2Int enemyTarget = result[0];
+            //float minDistance = float.MaxValue;
+
+            //foreach (Vector2Int enemy in result)
+            //{
+            //    float distance = DistanceToOwnBase(enemy);
+            //    if (distance < minDistance)
+            //    {
+            //        minDistance = distance;
+            //        enemyTarget = enemy;
+            //    }
+            //}
+
             while (result.Count > 1)
             {
                 result.RemoveAt(result.Count - 1);
             }
+            //result.Clear();
+            //result.Add(enemyTarget);
             return result;
-            ///////////////////////////////////////
         }
 
+        
         public override void Update(float deltaTime, float time)
         {
             if (_overheated)
