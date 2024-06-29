@@ -47,25 +47,33 @@ namespace UnitBrains.Player
         {
             List<Vector2Int> result = GetReachableTargets();
 
-            //Vector2Int enemyTarget = result[0];
-            //float minDistance = float.MaxValue;
+            if (result.Count == 0)
+            {
+                return new List<Vector2Int>(); ;
+            }
 
-            //foreach (Vector2Int enemy in result)
-            //{
-            //    float distance = DistanceToOwnBase(enemy);
-            //    if (distance < minDistance)
-            //    {
-            //        minDistance = distance;
-            //        enemyTarget = enemy;
-            //    }
-            //}
+            Vector2Int targetEnemy = new Vector2Int();
+
+            float minDistance = float.MaxValue;
+
+            foreach (Vector2Int enemy in result)
+            {
+                float distance = DistanceToOwnBase(enemy);
+                if (distance <= minDistance)
+                {
+                    minDistance = distance;
+                    targetEnemy = enemy;
+                }
+            }
+            result.Clear();
+            result.Add(targetEnemy);
 
             while (result.Count > 1)
             {
                 result.RemoveAt(result.Count - 1);
             }
-            //result.Clear();
-            //result.Add(enemyTarget);
+            float distance1 = DistanceToOwnBase(targetEnemy);
+            Debug.Log(distance1);
             return result;
         }
 
