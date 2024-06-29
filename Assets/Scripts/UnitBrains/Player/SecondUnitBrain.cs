@@ -72,8 +72,11 @@ namespace UnitBrains.Player
             {
                 result.RemoveAt(result.Count - 1);
             }
+
+            //просто для проверки в консоли финального значения
             float distance1 = DistanceToOwnBase(targetEnemy);
             Debug.Log(distance1);
+
             return result;
         }
 
